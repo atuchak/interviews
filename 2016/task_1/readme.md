@@ -1,5 +1,38 @@
-Задача1.
+The program should do the following:
 
+1. Create 50 zip-files, each of them contains 100 xml-files with random data and following structure:
+
+&lt;root&gt;
+
+&lt;var name=’id’ value=’&lt;random string&gt;’/&gt;
+
+&lt;var name=’level’ value=’&lt;random integer from 1 to 100&gt;’/&gt;
+
+&lt;objects&gt;
+
+&lt;object name=’&lt;random string&gt;’/&gt;
+
+&lt;object name=’&lt;random string&gt;’/&gt;
+
+…
+
+&lt;/objects&gt;
+
+&lt;/root&gt;
+
+Tag objects contains random number (from 1 to 10) object tag.
+
+2. Process folder with zip-files, parse xml-files and create csv-files:
+
+1st csv: id, level - one row per each xml-file
+
+2nd csv: id, object_name - one row for each tag object
+
+
+Task 2 must efficiently use multiple CPUs
+
+
+Задача.
  
 
 Написать программу на Python, которая делает следующие действия:
