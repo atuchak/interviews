@@ -1,0 +1,47 @@
+version: '2'
+services:
+  postgres:
+    image: "postgres:10-alpine"
+    networks:
+      - net
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=testdb
+    volumes:
+      - ./data/postgresql/:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: "rabbitmq:3.6-management"
+    networks:
+      - net
+    ports:
+      - "5672:5672"
+
+  webapp:
+    depends_on:
+      - postgres
+      - rabbitmq
+    links:
+      - postgres
+      - rabbitmq
+    build:
+      context: webapp
+    networks:
+      - net
+    ports:
+      - "8080:8080"
+
+  worker:
+    depends_on:
+      - postgres
+      - rabbitmq
+    links:
+      - postgres
+      - rabbitmq
+    build:
+      context: worker
+    networks:
+      - net
+networks:
+  net:
