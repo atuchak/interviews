@@ -41,6 +41,7 @@ def prefilter_file(filename):
 def write_prefiltered_file(item):
     filename, rows = item
     new_filename = filename.replace('/incoming/', '/staging/')
+    os.makedirs(os.path.dirname(new_filename), exist_ok=True)
     with open(new_filename, 'w') as f:
         writer = csv.writer(f)
         writer.writerows(rows)
